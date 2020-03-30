@@ -12,8 +12,8 @@ try
 {
     $conn = new PDO ("mysql:host=localhost;dbname=ephp059;", "ephp059", "xohsupha");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "<p>insert into ht_users (username, name, dayofbirth, monthofbirth, yearofbirth) values ('$user', '$name', '$day', '$month', '$year')</p>";
-    $conn->query("insert into ht_users (username, name, dayofbirth, monthofbirth, yearofbirth) values ('$user', '$name', $day, '$month', $year)");
+    $statement = $conn->prepare("INSERT INTO ht_users (username, name, dayofbirth, monthofbirth, yearofbirth) VALUES (?, ?, ?, ?, ?)");
+    $statement->execute([$user, $name, $day, $month, $year]);
 }
 // Catch any exceptions (errors) thrown from the 'try' block
 catch(PDOException $e) 
